@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -80,7 +81,9 @@ public class AdminView {
         roomNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Room,Integer> roomCapCol = new TableColumn<>("Capacity");
         roomCapCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        roomTable.getColumns().addAll(roomIdCol, roomNameCol, roomCapCol);
+        TableColumn<Room,String> DaySchedule = new TableColumn<>("Daily Schedule");
+        DaySchedule.setCellValueFactory(new PropertyValueFactory<>("dayScheduleLetters"));
+        roomTable.getColumns().addAll(roomIdCol, roomNameCol, roomCapCol, DaySchedule);
 
         TextField newId = new TextField(); newId.setPromptText("Room ID");
         TextField newName = new TextField(); newName.setPromptText("Name");
