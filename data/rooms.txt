@@ -1,0 +1,2 @@
+R1,Conference A,10
+R2,Meeting B,5

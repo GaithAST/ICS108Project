@@ -1,0 +1,3 @@
+admin,admin,true
+user1,pass,false
+admin12,admin12,true
