@@ -31,8 +31,8 @@ public class DataStore {
         reservations = loadReservations();
         if (users.isEmpty()) users.add(new User("admin", "admin", true));
         if (rooms.isEmpty()) {
-            rooms.add(new Room("R1", "Conference A", 10));
-            rooms.add(new Room("R2", "Meeting B", 5));
+            rooms.add(new Room("R1", "Conference A", 10,"1111111"));
+            rooms.add(new Room("R2", "Meeting B", 5,"11111111"));
         }
     }
 
@@ -52,7 +52,7 @@ public class DataStore {
         try (Scanner sc = new Scanner(new File(ROOM_FILE))) {
             while (sc.hasNextLine()) {
                 String[] p = sc.nextLine().split(",");
-                list.add(new Room(p[0], p[1], Integer.parseInt(p[2])));
+                list.add(new Room(p[0], p[1], Integer.parseInt(p[2]), p[3]));
             }
         } catch (IOException ignored) {}
         return list;
@@ -78,7 +78,7 @@ public class DataStore {
                 Room r = rooms.stream()
                         .filter(x -> x.getId().equals(roomId))
                         .findFirst()
-                        .orElse(new Room(roomId, roomId, 0));
+                        .orElse(new Room(roomId, roomId, 0,"1111111"));
                 Reservation res = new Reservation(resId, u, r, start, end);
                 res.setStatus(status);
                 res.setComment(comment);
@@ -105,7 +105,7 @@ public class DataStore {
     private static void saveRooms() {
         try (PrintWriter pw = new PrintWriter(new FileWriter(ROOM_FILE))) {
             for (Room r : rooms) {
-                pw.println(String.join(",", r.getId(), r.getName(), Integer.toString(r.getCapacity())));
+                pw.println(String.join(",", r.getId(), r.getName(), Integer.toString(r.getCapacity()),r.getDaySchedule()));
             }
         } catch (IOException ignored) {}
     }
